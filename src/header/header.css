@@ -3,10 +3,12 @@
     height: 60px;
     background-color: var(--white);
     box-shadow: var(--shadow-2);
+    position: relative; /* Garantir que a sombra não fique oculta */
+    z-index: 10; /* Garante que o header esteja acima do conteúdo */
 }
 
 .logo {
     width: 90px;
     height: 34px;
-    margin: 12px 20px;
+    margin: 12px auto;
 }
