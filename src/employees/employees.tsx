@@ -1,16 +1,26 @@
-import { useState } from 'react';
+// import { useState } from 'react';
+import { useFetch } from "../hooks/useFetch.tsx";
+import { formatDate, formatPhoneNumber } from '../utils/util.tsx';
+import { useToggleDetails } from '../utils/util.tsx';
 import './employees.css';
 import searchIcon from '../assets/search-icon.png';
 import arrowIconDown from '../assets/arrow-down.png';
 
-export function Employees() {
-    const [isOpen, setIsOpen] = useState<boolean[]>([]);
+interface Employee {
+    id: number;
+    image: string;
+    name: string;
+    job: string;
+    admission_date: string;
+    phone: string;
+}
 
-    const toggleDetails = (index: number) => {
-        const newIsOpen = [...isOpen];
-        newIsOpen[index] = !newIsOpen[index];
-        setIsOpen(newIsOpen);
-    };
+export function Employees() {
+    const { data: employees, loading, error } = useFetch<Employee[]>("http://localhost:3000/employees");
+    const { isOpen, toggleDetails } = useToggleDetails();
+
+    if (loading) return <p>Carregando...</p>;
+    if (error) return <p>Erro: {error}</p>;
 
     return (
         <div className="employees-content">
@@ -36,53 +46,44 @@ export function Employees() {
                         </tr>
                     </thead>
                     <tbody className="employees-table-content">
-                        <tr>
-                            <td className="photo-column">TESTE</td>
-                            <td className="name-column">TESTE</td>
-                            <td className="role-column">TESTE</td>
-                            <td className="admission-column">TESTE</td>
-                            <td className="phone-column">TESTE</td>
-                            <td className="more-column"><img src={arrowIconDown} alt="Expandir" className={`arrow-icon ${isOpen[0] ? 'rotated' : ''}`} onClick={() => toggleDetails(0)}/></td>
-                        </tr>
-                        <tr className="extra-row" style={{ display: isOpen[0] ? 'table-row' : 'none' }}>
-                            <td colSpan={6}>
-                                <div className="extra-content">
-                                    <div className="extra-info">
-                                        <span className="extra-label">Cargo</span> Teste
-                                    </div>
-                                    <div className="extra-info">
-                                        <span className="extra-label">Data de Admissão</span> Teste
-                                    </div>
-                                    <div className="extra-info">
-                                        <span className="extra-label">Telefone</span> Teste
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td className="photo-column">TESTE</td>
-                            <td className="name-column">TESTE</td>
-                            <td className="role-column">TESTE</td>
-                            <td className="admission-column">TESTE</td>
-                            <td className="phone-column">TESTE</td>
-                            <td className="more-column"><img src={arrowIconDown} alt="Expandir" className={`arrow-icon ${isOpen[1] ? 'rotated' : ''}`} onClick={() => toggleDetails(1)}/></td>
-                        </tr>
-                        <tr className="extra-row" style={{ display: isOpen[1] ? 'table-row' : 'none' }}>
-                            <td colSpan={6}>
-                                <div className="extra-content">
-                                    <div className="extra-info">
-                                        <span className="extra-label">Cargo</span> Teste
-                                    </div>
-                                    <div className="extra-info">
-                                        <span className="extra-label">Data de Admissão</span> Teste
-                                    </div>
-                                    <div className="extra-info">
-                                        <span className="extra-label">Telefone</span> Teste
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                        {employees?.map((employee) => (
+                            <>
+                                <tr key={employee.id}>
+                                    <td className="photo-column">
+                                        <img src={employee.image} className="employee-photo" />
+                                    </td>
+                                    <td className="name-column">{employee.name}</td>
+                                    <td className="role-column">{employee.job}</td>
+                                    <td className="admission-column">{formatDate(employee.admission_date)}</td>
+                                    <td className="phone-column">{formatPhoneNumber(employee.phone)}</td>
+                                    <td className="more-column">
+                                        <img
+                                            src={arrowIconDown}
+                                            alt="Expandir"
+                                            className={`arrow-icon ${isOpen[employee.id] ? "rotated" : ""}`}
+                                            onClick={() => toggleDetails(employee.id)}
+                                        />
+                                    </td>
+                                </tr>
+                                {isOpen[employee.id] && (
+                                    <tr className="extra-row">
+                                        <td colSpan={6}>
+                                            <div className="extra-content">
+                                                <div className="extra-info">
+                                                    <span className="extra-label">Cargo</span> {employee.job}
+                                                </div>
+                                                <div className="extra-info">
+                                                    <span className="extra-label">Data de Admissão</span>{formatDate(employee.admission_date)}
+                                                </div>
+                                                <div className="extra-info">
+                                                    <span className="extra-label">Telefone</span>{formatPhoneNumber(employee.phone)}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
+                            </>
+                        ))}
                     </tbody>
                 </table>
             </div>

@@ -92,8 +92,14 @@
     width: 10%;
 }
 
+.employee-photo{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+
 .name-column {
-    width: 30%;
+    width: 25%;
 }
 
 .role-column {
@@ -101,18 +107,16 @@
 }
 
 .admission-column {
-    width: 20%;
+    width: 22.5%;
 }
 
 .phone-column {
-    width: 20%;
+    width: 22.5%;
 }
 
 .more-column{
     display: none;
 }
-
-/* Ajustes para mobile */
 
 @media screen and (max-width: 768px) {
     .employees-header{
@@ -155,6 +159,10 @@
         display: table-header-group;
     }
 
+    .employees-table-content > tr {
+        box-shadow: none
+    }
+
     .photo-column {
         width: 20%;
     }
@@ -191,17 +199,29 @@
     .extra-content {
         display: flex;
         flex-direction: column; 
-        padding: 10px;
+        padding: 16px;
+        margin-bottom: 10px;
         background-color: var(--white);
     }
-    
+
     .extra-info {
         display: flex;
-        justify-content: space-between; 
-        padding: 8px 0;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0;
+        border-bottom: 1px dotted var(--gray-10);
     }
-    
-    .extra-info:last-child {
-        border-bottom: none;
+}
+
+@media screen and (min-width: 769px) {
+    .extra-row {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 768px) and (min-width: 460px) {
+    .extra-content {
+        padding-left: 50px;
+        padding-right: 50px;
     }
 }
