@@ -107,3 +107,101 @@
 .phone-column {
     width: 20%;
 }
+
+.more-column{
+    display: none;
+}
+
+/* Ajustes para mobile */
+
+@media screen and (max-width: 768px) {
+    .employees-header{
+        height: 96px;
+        flex-direction: column;
+        align-items: baseline;
+    }
+    
+    .search-box {
+        width: 100%;
+    }
+    
+    .search-box form {
+        width: 100%;
+    }
+
+    .search-box input {
+        width: 100%; 
+        box-sizing: border-box;
+    }
+
+    .employees-table,
+    .employees-table-header {
+        width: 100%;
+    }
+
+    .role-column,
+    .admission-column,
+    .phone-column {
+        display: none;
+    }
+
+    .employees-table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .employees-table-header {
+        width: 100%;
+        display: table-header-group;
+    }
+
+    .photo-column {
+        width: 20%;
+    }
+
+    .name-column {
+        width: 70%;
+    }
+
+    .more-column {
+        width: 15%;
+        text-align: center;
+        display: table-cell;
+    }
+
+    .more-column > img{
+        width: 17px;
+        height: 9px;
+    }
+    
+    .arrow-icon {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .arrow-icon {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    
+    .arrow-icon.rotated {
+        transform: rotate(180deg);
+    }
+
+    .extra-content {
+        display: flex;
+        flex-direction: column; 
+        padding: 10px;
+        background-color: var(--white);
+    }
+    
+    .extra-info {
+        display: flex;
+        justify-content: space-between; 
+        padding: 8px 0;
+    }
+    
+    .extra-info:last-child {
+        border-bottom: none;
+    }
+}
