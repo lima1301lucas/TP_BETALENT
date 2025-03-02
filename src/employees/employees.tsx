@@ -1,6 +1,5 @@
-// import { useState } from 'react';
 import { useFetch } from "../hooks/useFetch.tsx";
-import { formatDate, formatPhoneNumber } from '../utils/util.tsx';
+import { formatDate, formatPhoneNumber,  renderFetchStatus} from '../utils/util.tsx';
 import { useToggleDetails } from '../utils/util.tsx';
 import './employees.css';
 import searchIcon from '../assets/search-icon.png';
@@ -16,11 +15,11 @@ interface Employee {
 }
 
 export function Employees() {
-    const { data: employees, loading, error } = useFetch<Employee[]>("http://localhost:3000/employees");
+    const { data: employees, loading,  error} = useFetch<Employee[]>("http://localhost:3000/employees");
     const { isOpen, toggleDetails } = useToggleDetails();
 
-    if (loading) return <p>Carregando...</p>;
-    if (error) return <p>Erro: {error}</p>;
+    const statusMessage = renderFetchStatus(loading, error);
+    if (statusMessage) return statusMessage;
 
     return (
         <div className="employees-content">

@@ -38,3 +38,23 @@ export function useToggleDetails() {
         toggleDetails
     };
 }
+
+export function renderFetchStatus(loading: boolean, error: string | null) {
+    if (loading) 
+        return(
+            <div className="message-space">
+                <div className="loader-dot"></div>
+                <div className="loader-dot"></div>
+                <div className="loader-dot"></div>
+            </div>
+        );
+
+    if (error) 
+        return (
+            <div className="message-space">
+                <p className="error-message">Erro ao mostrar os dados...</p>
+            </div>     
+        );
+
+    return null;
+}
