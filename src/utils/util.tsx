@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Employee } from '../employees/employees.tsx';
 
 export function formatDate(date: string) {
     const regex = /^(\d{4})-(\d{2})-(\d{2})/;
@@ -57,4 +58,19 @@ export function renderFetchStatus(loading: boolean, error: string | null) {
         );
 
     return null;
+}
+
+export function filterEmployees(employees: Employee[], searchTerm: string): Employee[] {
+    const searchLower = searchTerm.toLowerCase();
+    return employees.filter((employee) => {
+        return (
+            employee.name.toLowerCase().includes(searchLower) ||
+            employee.job.toLowerCase().includes(searchLower) ||
+            employee.phone.includes(searchLower)
+        );
+    });
+}
+
+export function handleSearchClick(searchTerm: string,employees: Employee[], setFilteredEmployees: React.Dispatch<React.SetStateAction<Employee[]>>) {
+    setFilteredEmployees(filterEmployees(employees, searchTerm));
 }
