@@ -19,7 +19,8 @@ export interface Employee {
 }
 
 export function Employees() {
-    const { data: employeesData, loading, error } = useFetch<Employee[]>("http://localhost:3000/employees");
+    const url = "http://localhost:3000/employees";
+    const { data: employeesData, loading, error } = useFetch<Employee[]>(url);
     const { isOpen, toggleDetails } = useToggleDetails();
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([]);
@@ -70,35 +71,42 @@ export function Employees() {
                     </thead>
                     <tbody className="employees-table-content">
                         {filteredEmployees.map((employee) => (
-                            <tr key={employee.id}>
-                                <td className="photo-column">
-                                    <img src={employee.image} className="employee-photo" />
-                                </td>
-                                <td className="name-column">{employee.name}</td>
-                                <td className="role-column">{employee.job}</td>
-                                <td className="admission-column">{formatDate(employee.admission_date)}</td>
-                                <td className="phone-column">{formatPhoneNumber(employee.phone)}</td>
-                                <td className="more-column">
-                                    <img
-                                        src={arrowIconDown}
-                                        alt="Expandir"
-                                        className={`arrow-icon ${isOpen[employee.id] ? "rotated" : ""}`}
-                                        onClick={() => toggleDetails(employee.id)}
-                                    />
-                                </td>
-                            </tr>
+                            <>
+                                <tr key={employee.id}>
+                                    <td className="photo-column">
+                                        <img src={employee.image} className="employee-photo" />
+                                    </td>
+                                    <td className="name-column">{employee.name}</td>
+                                    <td className="role-column">{employee.job}</td>
+                                    <td className="admission-column">{formatDate(employee.admission_date)}</td>
+                                    <td className="phone-column">{formatPhoneNumber(employee.phone)}</td>
+                                    <td className="more-column">
+                                        <img src={arrowIconDown} alt="Expandir" className={`arrow-icon ${isOpen[employee.id] ? "rotated" : ""}`} onClick={() => toggleDetails(employee.id)}/>
+                                    </td>
+                                </tr>
+                                {isOpen[employee.id] && (
+                                    <tr className="extra-row">
+                                        <td colSpan={6}>
+                                            <div className="extra-content">
+                                                <div className="extra-info">
+                                                    <span className="extra-label">Cargo:</span> {employee.job}
+                                                </div>
+                                                <div className="extra-info">
+                                                    <span className="extra-label">Data de Admissão:</span> {formatDate(employee.admission_date)}
+                                                </div>
+                                                <div className="extra-info">
+                                                    <span className="extra-label">Telefone:</span> {formatPhoneNumber(employee.phone)}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
+                            </>
                         ))}
                     </tbody>
                 </table>
             </div>
-            <ToastContainer 
-                position="bottom-right" 
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={true}
-                closeOnClick={true}
-                rtl={false}
-            />
+            <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={true} closeOnClick={true} rtl={false}/>
         </div>
     );    
 }
