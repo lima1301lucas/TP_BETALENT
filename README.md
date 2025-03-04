@@ -70,7 +70,7 @@ Abra o link gerado no terminal no navegador. Assim que abrir, você deverá ver 
 ## ✨ Funcionalidades do projeto
 **Filtragem de dados:** O usuário pode visualizar os dados presentes na tabela e filtrar as informações pelo **nome**, **cargo** ou **telefone**.  
   - Para filtrar, basta digitar algo no campo de "**Pesquisar**" e clicar na lupa à direita.  
-  - Caso nenhum resultado seja encontrado, a tabela exibirá todos os dados e uma notificação aparecerá no canto inferior direito com a mensagem:  `"Nenhum resultado encontrado"`
+  - Caso nenhum resultado seja encontrado, a tabela exibirá todos os dados e uma notificação aparecerá no canto inferior direito com a mensagem:  `"Nenhum registro encontrado"`
   - Para limpar o filtro, basta recarregar a página ou limpar o campo de pesquisa e clicar na lupa novamente.
 
 ---
