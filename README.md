@@ -1,54 +1,82 @@
-# React + TypeScript + Vite
+# 🚀 Teste Técnico Front-end BeTalent
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto consiste na criação de uma interface web para exibição de uma tabela dinâmica de funcionários. Os dados são consumidos de uma API simulada, permitindo a visualização e o gerenciamento das informações. A aplicação é totalmente responsiva e conta com funcionalidades de filtragem, permitindo buscar funcionários pelo nome, cargo ou telefone.
 
-Currently, two official plugins are available:
+---
+<br>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Pré-requisitos
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+[Node.js](https://nodejs.org/pt-br/download) na versão ^22.12.0
+```diff
+node -v
+```
+npm na versão ^10.9.0
+```diff
+npm -v
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Além disso, este projeto utiliza as seguintes tecnologias:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React com Vite**
+- **TypeScript**
+- **Json-server**
+- **React Toastify**
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+---
+<br>
+
+## 🚀 Como executar o projeto
+
+### 1️⃣ Clonar o repositório
+```sh
+git clone https://github.com/lima1301lucas/TP_BETALENT.git
 ```
+Navegue até a pasta com o comando + nome da pasta
+
+```sh
+cd nome-da-pasta
+```
+
+### 2️⃣ Instalar as dependências
+```sh
+npm install
+```
+
+### 3️⃣ Iniciar o json-server (API simulada)
+```sh
+json-server --watch db.json
+```
+Observação: Caso você tenha problemas com o json-server, tente rodá-lo com: `npx json-server db.json` ou `yarn json-server <path>/db.json` (Substitua o `<path>` pelo caminho completo até o diretório em que o arquivo db.json está localizado.)
+
+### 4️⃣ Verificar a URL da API
+Verifique o link da URL que será disponibilizado no terminal e confira se é o mesmo da variável `url` que está no arquivo `employees.tsx`. Se não for o mesmo, mude para o que foi gerado. Aqui está um exemplo de como o código está estruturado:
+
+```typescript
+const url = "http://localhost:3000/employees";
+const { data: employeesData, loading, error } = useFetch<Employee[]>(url);
+```
+
+### 5️⃣ Iniciar o projeto
+```sh
+npm run dev
+```
+Abra o link gerado no terminal no navegador. Assim que abrir, você deverá ver uma tela com um cabeçalho e uma tabela contendo informações de funcionários.
+
+---
+<br>
+
+## ✨ Funcionalidades do projeto
+**Filtragem de dados:** O usuário pode visualizar os dados presentes na tabela e filtrar as informações pelo **nome**, **cargo** ou **telefone**.  
+  - Para filtrar, basta digitar algo no campo de "**Pesquisar**" e clicar na lupa à direita.  
+  - Caso nenhum resultado seja encontrado, a tabela exibirá todos os dados e uma notificação aparecerá no canto inferior direito com a mensagem:  `"Nenhum resultado encontrado"`
+  - Para limpar o filtro, basta recarregar a página ou limpar o campo de pesquisa e clicar na lupa novamente.
+
+---
+<br>
+
+## 🛠️ Tecnologias utilizadas
+- React com Vite - Para a construção da interface.
+- TypeScript - Para adicionar a lógica.
+- Json-server - Para simular uma API.
+- React Toastify - Para exibir notificações.
