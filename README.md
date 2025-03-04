@@ -1,6 +1,6 @@
 # 🚀 Teste Técnico Front-end BeTalent
 
-Este projeto consiste na criação de uma interface web para exibição de uma tabela dinâmica de funcionários. Os dados são consumidos de uma API simulada, permitindo a visualização e o gerenciamento das informações. A aplicação é totalmente responsiva e conta com funcionalidades de filtragem, permitindo buscar funcionários pelo nome, cargo ou telefone.
+Este projeto consiste na criação de uma interface web para exibição de uma tabela dinâmica de funcionários. Os dados são consumidos de uma API simulada, permitindo a visualização das informações. A aplicação é totalmente responsiva e conta com funcionalidades de filtragem, permitindo buscar funcionários pelo nome, cargo ou telefone.
 
 ---
 <br>
@@ -28,28 +28,29 @@ Além disso, este projeto utiliza as seguintes tecnologias:
 
 ## 🚀 Como executar o projeto
 
-### 1️⃣ Clonar o repositório
+### 1️⃣ Clone o repositório
 ```sh
 git clone https://github.com/lima1301lucas/TP_BETALENT.git
 ```
-Navegue até a pasta com o comando + nome da pasta
+
+### 2️⃣ Navegue até a pasta com o comando cd + nome da pasta
 
 ```sh
 cd nome-da-pasta
 ```
 
-### 2️⃣ Instalar as dependências
+### 3️⃣ Instale as dependências
 ```sh
 npm install
 ```
 
-### 3️⃣ Iniciar o json-server (API simulada)
+### 4️⃣ Inicie o json-server (API simulada)
 ```sh
 json-server --watch db.json
 ```
 Observação: Caso você tenha problemas com o json-server, tente rodá-lo com: `npx json-server db.json` ou `yarn json-server <path>/db.json` (Substitua o `<path>` pelo caminho completo até o diretório em que o arquivo db.json está localizado.)
 
-### 4️⃣ Verificar a URL da API
+### 5️⃣ Verifique a URL da API
 Verifique o link da URL que será disponibilizado no terminal e confira se é o mesmo da variável `url` que está no arquivo `employees.tsx`. Se não for o mesmo, mude para o que foi gerado. Aqui está um exemplo de como o código está estruturado:
 
 ```typescript
@@ -57,7 +58,7 @@ const url = "http://localhost:3000/employees";
 const { data: employeesData, loading, error } = useFetch<Employee[]>(url);
 ```
 
-### 5️⃣ Iniciar o projeto
+### 6️⃣ Inicie o projeto
 ```sh
 npm run dev
 ```
